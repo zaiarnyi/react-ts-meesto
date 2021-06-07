@@ -1,0 +1,196 @@
+@mixin anim($time, $delay) {
+	-webkit-transition: all $time ease $delay;
+	-moz-transition: all $time ease $delay;
+	-ms-transition: all $time ease $delay;
+	-o-transition: all $time ease $delay;
+	transition: all $time ease $delay;
+}
+
+@mixin anim_cubic($time, $delay) {
+	-webkit-transition: all $time cubic-bezier(0.68, -0.55, 0.265, 1.55) $delay;
+	-moz-transition: all $time cubic-bezier(0.68, -0.55, 0.265, 1.55) $delay;
+	-ms-transition: all $time cubic-bezier(0.68, -0.55, 0.265, 1.55) $delay;
+	-o-transition: all $time cubic-bezier(0.68, -0.55, 0.265, 1.55) $delay;
+	transition: all $time cubic-bezier(0.68, -0.55, 0.265, 1.55) $delay;
+}
+
+@mixin animate($name, $time, $infinite, $type) {
+	-webkit-animation: $name $time + s $infinite $type;
+	-moz-animation: $name $time + s $infinite $type;
+	-o-animation: $name $time + s $infinite $type;
+	animation: $name $time + s $infinite $type;
+}
+
+@mixin rotate($deg) {
+	-moz-transform: rotate($deg);
+	-ms-transform: rotate($deg);
+	-webkit-transform: rotate($deg);
+	-o-transform: rotate($deg);
+	transform: rotate($deg);
+}
+
+@mixin scale($num) {
+	-moz-transform: scale($num);
+	-ms-transform: scale($num);
+	-webkit-transform: scale($num);
+	-o-transform: scale($num);
+	transform: scale($num);
+}
+
+@mixin skew($num) {
+	-webkit-transform: skewX($num);
+	-moz-transform: skewX($num);
+	-ms-transform: skewX($num);
+	-o-transform: skewX($num);
+	transform: skewX($num);
+}
+
+
+@mixin tr($x, $y) {
+	transform: translate($x, $y);
+	-webkit-transform: translate($x, $y);
+	-ms-transform: translate($x, $y);
+	-o-transform: translate($x, $y);
+	-moz-transform: translate($x, $y);
+}
+
+@mixin flexbox() {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	font-size: 0;
+}
+
+@mixin flexboxinline() {
+	display: -webkit-inline-flex;
+	display: -moz-inline-flex;
+	display: -ms-inline-flex;
+	display: -o-inline-flex;
+	display: inline-flex;
+}
+
+@mixin flexorder($val) {
+	-webkit-box-ordinal-group: $val;
+	-moz-box-ordinal-group: $val;
+	-ms-flex-order: $val;
+	-webkit-order: $val;
+	order: $val;
+}
+
+//Микисн для border-radius
+@mixin br($procent) {
+	border-radius: $procent;
+	-webkit-border-radius: $procent;
+	-moz-border-radius: $procent;
+	-ms-border-radius: $procent;
+	-o-border-radius: $procent;
+}
+
+//Подключение шрифта
+@mixin font($font_name, $file_name, $weight, $style) {
+	@font-face {
+		font-family: $font_name;
+		font-display: swap;
+		src: url("../fonts/#{$file_name}.woff2") format("woff2"),
+		url("../fonts/#{$file_name}.woff") format("woff");
+		font-weight: #{$weight};
+		font-style: #{$style};
+	}
+}
+
+//Адаптивный шрифт
+@mixin fontSize($pcSize, $mobSize, $maxSize) {
+	$addSize: $pcSize - $mobSize;
+
+	@if $maxSize==1 {
+		font-size: $pcSize + px;
+
+		@media (max-width: #{$maxWidthContainer + px}) {
+			font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidthContainer - 320}));
+		}
+	}
+
+	@else {
+		font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+	}
+}
+
+
+//Адаптивный шрифт от maxGraph по сути тоже что и от FR
+@function vw($value) {
+	@return $value / $maxWidth * 100vw;
+}
+
+
+
+//Функция по добавлению data svg
+@function svg-url($svg) {
+
+	//
+	//  Add missing namespace
+	//
+	@if not str-index($svg, xmlns) {
+		$svg: str-replace($svg, '<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+	}
+
+	//
+	//  Chunk up string in order to avoid
+	//  "stack level too deep" error
+	//
+	$encoded:'';
+	$slice: 2000;
+	$index: 0;
+	$loops: ceil(str-length($svg)/$slice);
+
+	@for $i from 1 through $loops {
+		$chunk: str-slice($svg, $index, $index + $slice - 1);
+		//
+		//   Encode
+		//
+		$chunk: str-replace($chunk, '"', '\'');
+		$chunk: str-replace($chunk, '%', '%25');
+		$chunk: str-replace($chunk, '#', '%23');
+		$chunk: str-replace($chunk, '{', '%7B');
+		$chunk: str-replace($chunk, '}', '%7D');
+		$chunk: str-replace($chunk, '<', '%3C');
+		$chunk: str-replace($chunk, '>', '%3E');
+
+		//
+		//    The maybe list
+		//
+		//    Keep size and compile time down
+		//    ... only add on documented fail
+		//
+		//  $chunk: str-replace($chunk, '&', '%26');
+		//  $chunk: str-replace($chunk, '|', '%7C');
+		//  $chunk: str-replace($chunk, '[', '%5B');
+		//  $chunk: str-replace($chunk, ']', '%5D');
+		//  $chunk: str-replace($chunk, '^', '%5E');
+		//  $chunk: str-replace($chunk, '`', '%60');
+		//  $chunk: str-replace($chunk, ';', '%3B');
+		//  $chunk: str-replace($chunk, '?', '%3F');
+		//  $chunk: str-replace($chunk, ':', '%3A');
+		//  $chunk: str-replace($chunk, '@', '%40');
+		//  $chunk: str-replace($chunk, '=', '%3D');
+
+		$encoded: #{$encoded}#{$chunk};
+		$index: $index + $slice;
+	}
+
+	@return url("data:image/svg+xml,#{$encoded}");
+}
+
+//  Background svg mixin
+@mixin background-svg($svg) {
+	background-image: svg-url($svg);
+}
+
+//  Helper function to replace characters in a string
+@function str-replace($string, $search, $replace: '') {
+	$index: str-index($string, $search);
+	@return if($index,
+		str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace),
+		$string);
+}
