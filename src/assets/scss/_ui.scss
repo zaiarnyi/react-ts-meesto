@@ -21,103 +21,6 @@
 }
 
 //====================================================================================================
-// body{
-
-// 	&::-webkit-scrollbar{
-// 		width: 15px;
-// 	}
-// 	// дорожка для ползунка
-// 	&::-webkit-scrollbar-track{
-// 		background-color: rgb(56, 222, 252);
-// 		box-shadow: 0 0 2px rgba(0, 0, 0, 0.2) inset;
-// 	}
-// 	// ползунок
-// 	&::-webkit-scrollbar-thumb{
-// 		background-color: rgb(253, 0, 0);
-// 		border-radius: 5px;
-// 		border: 3px solid rgb(42, 161, 182);
-// 		&:hover{
-// 			background-color: rgb(197, 185, 115);
-// 		}
-// 	}
-// }
-//====================================================================================================
-@media (min-width:992px) {
-	.fishka {
-
-		&:hover {
-			-webkit-animation-duration: calc(2s * 2);
-			animation-duration: calc(2s * 2);
-			-webkit-animation-duration: calc(2s * 2);
-			animation-duration: calc(2s * 2);
-			-webkit-animation-name: fishka;
-			animation-name: fishka;
-			-webkit-transform-origin: top left;
-			transform-origin: top left;
-		}
-	}
-
-
-	@-webkit-keyframes fishka {
-		0% {
-			-webkit-animation-timing-function: ease-in-out;
-			animation-timing-function: ease-in-out;
-		}
-
-		20%,
-		60% {
-			-webkit-transform: rotate3d(0, 0, 1, 10deg);
-			transform: rotate3d(0, 0, 1, 10deg);
-			-webkit-animation-timing-function: ease-in-out;
-			animation-timing-function: ease-in-out;
-		}
-
-		40%,
-		80% {
-			-webkit-transform: rotate3d(0, 0, 1, 20deg);
-			transform: rotate3d(0, 0, 1, 20deg);
-			-webkit-animation-timing-function: ease-in-out;
-			animation-timing-function: ease-in-out;
-			opacity: 1;
-		}
-
-		to {
-			-webkit-transform: translate3d(0, 700px, 0);
-			transform: translate3d(0, 700px, 0);
-			opacity: 0;
-		}
-	}
-
-	@keyframes fishka {
-		0% {
-			-webkit-animation-timing-function: ease-in-out;
-			animation-timing-function: ease-in-out;
-		}
-
-		20%,
-		60% {
-			-webkit-transform: rotate3d(0, 0, 1, 20deg);
-			transform: rotate3d(0, 0, 1, 20deg);
-			-webkit-animation-timing-function: ease-in-out;
-			animation-timing-function: ease-in-out;
-		}
-
-		40%,
-		80% {
-			-webkit-transform: rotate3d(0, 0, 1, 10deg);
-			transform: rotate3d(0, 0, 1, 10deg);
-			-webkit-animation-timing-function: ease-in-out;
-			animation-timing-function: ease-in-out;
-			opacity: 1;
-		}
-
-		to {
-			-webkit-transform: translate3d(0, 700px, 0);
-			transform: translate3d(0, 700px, 0);
-			opacity: 0;
-		}
-	}
-}
 
 //====================================================================================================
 .row:after {
@@ -128,79 +31,6 @@
 
 .rub:after {
 	content: "₽";
-}
-
-//====================================================================================================
-%noselect {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-//====================================================================================================
-ol.counter {
-	list-style-type: none;
-	counter-reset: item;
-
-	li {
-		position: relative;
-		padding: 0px 0px 0px 45px;
-
-		&:before {
-			counter-increment: item;
-			content: counter(item);
-			position: absolute;
-			left: 0;
-			top: 0;
-			color: #818181;
-			font-size: 14px;
-			font-weight: 700;
-			text-align: center;
-			line-height: 26px;
-			border-radius: 50%;
-			width: 28px;
-			height: 28px;
-			border: 1px solid #4274bb;
-		}
-	}
-}
-
-//====================================================================================================
-.ellipsis {
-	display: block;
-	overflow: hidden;
-	width: 100%;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-
-.es {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-
-//====================================================================================================
-.table {
-	display: table;
-	font-size: 0;
-	width: 100%;
-	//table-layout: fixed;
-}
-
-.trow {
-	display: table-row;
-}
-
-.cell {
-	display: table-cell;
-
-	&.full {
-		width: 100%;
-	}
 }
 
 //====================================================================================================
@@ -231,80 +61,6 @@ body.ie {
 		visibility: hidden;
 	}
 }
-
-//====================================================================================================
-.video {
-	position: relative;
-	overflow: hidden;
-	height: 0;
-	padding-bottom: 56.25%;
-
-	video,
-	iframe,
-	object,
-	embed {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-}
-
-.videobg {
-
-	video,
-	iframe,
-	object,
-	embed {
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		min-width: 100%;
-		min-height: 100%;
-		width: auto;
-		height: auto;
-		z-index: -100;
-		transform: translateX(-50%) translateY(-50%);
-		background-size: cover;
-	}
-}
-
-//====================================================================================================
-.moretext {
-	overflow: hidden;
-}
-
-.moretext__more {
-	cursor: pointer;
-
-	span {
-		font-style: normal;
-
-		&:first-child {
-			display: block;
-		}
-
-		&:last-child {
-			display: none;
-		}
-	}
-
-	&.active {
-		span {
-			font-style: normal;
-
-			&:first-child {
-				display: none;
-			}
-
-			&:last-child {
-				display: block;
-			}
-		}
-	}
-}
-
 //====================================================================================================
 %graystyle {
 	transition: all 0.3s ease 0s;
@@ -330,6 +86,7 @@ body.ie {
 }
 
 //====================================================================================================
+
 ._swiper {
 	overflow: hidden;
 
@@ -368,51 +125,6 @@ body.ie {
 	display: none !important;
 }
 
-//====================================================================================================
-.slick-slider {
-	position: relative;
-
-	.slick-track,
-	.slick-list {
-		-webkit-transform: translate3d(0, 0, 0);
-		-moz-transform: translate3d(0, 0, 0);
-		-ms-transform: translate3d(0, 0, 0);
-		-o-transform: translate3d(0, 0, 0);
-		transform: translate3d(0, 0, 0);
-	}
-
-	.slick-list {
-		position: relative;
-		overflow: hidden;
-		width: 100%;
-	}
-
-	.slick-track {
-		position: relative;
-		width: 100%;
-		display: flex;
-	}
-
-	.slick-slide {
-		position: relative;
-	}
-
-	.slick-arrow {
-		&.slick-prev {}
-
-		&.slick-next {}
-	}
-
-	.slick-dots {
-		li {
-			button {}
-
-			&.slick-active {
-				button {}
-			}
-		}
-	}
-}
 
 //=====================================================================================================================
 .tab__item {
@@ -436,83 +148,6 @@ body.ie {
 	}
 }
 
-//=====================================================================================================================
-.mirror {
-	transform: scale(-1, 1);
-}
-
-//=====================================================================================================================
-.nicescroll-rails {
-	z-index: 1000 !important;
-}
-
-//=====================================================================================================================
-.gm-style {}
-
-.gm-style-iw-t {
-	opacity: 0;
-}
-
-.baloon {
-	opacity: 1;
-	right: -7px !important;
-	bottom: 80px !important;
-
-	button {
-		display: none !important;
-	}
-
-	&:after {
-		display: none !important;
-	}
-}
-
-.baloon-style {
-	display: none;
-}
-
-.baloon-content.gm-style-iw {
-	opacity: 1;
-	border-radius: 0px !important;
-	max-width: 300px !important;
-	padding: 0 !important;
-	left: 0 !important;
-	width: 100% !important;
-	overflow: visible !important;
-
-	>.gm-style-iw-d {
-		overflow: hidden !important;
-		max-width: none !important;
-	}
-
-	&:after {
-		display: none !important;
-	}
-}
-
-.baloon-close {
-	top: 18px !important;
-}
-
-//========================================================================================================================================================
-._custom-scroll {
-	position: fixed;
-	right: 0;
-	top: 0;
-	width: 3px;
-	height: 100%;
-	z-index: 1000;
-
-	//background-color: rgba(0, 0, 0, 0.1);
-	&__line {
-		background-color: rgba(0, 0, 0, 0.5);
-		border-radius: 3px 0 0 3px;
-		position: relative;
-		left: 0;
-		top: 0;
-		width: 100%;
-	}
-}
 //====================================================================================================
 .price-slider {
 	height: 1px;

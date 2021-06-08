@@ -240,46 +240,54 @@
 			font-size: 16px;
 		}
 
-		span {
+		&.menu__spoller {
 			position: relative;
 			padding: 0 26px 0 0;
-
+			cursor: pointer;
 			&::after {
 				content: '';
 				transition: all 0.3s ease 0s;
 				position: absolute;
-				top: 6px;
+				top: 3px;
 				right: 0;
 				width: 13px;
 				height: 12px;
 				background-image: svg-url('<svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="#bdbdbd" d="M285 273L91 467c-9 10-24 10-34 0l-22-22c-10-10-10-25-1-34l155-155L34 101c-9-9-9-24 1-34l22-22c10-10 25-10 34 0l194 194c10 9 10 25 0 34z"/></svg>');
 				background-repeat: no-repeat;
 			}
-
-		}
-
-		&._active {
-			span {
+			&._active {
 				&::after {
 					transition: all 0.3s ease 0s;
 					top: 10px;
-					@include rotate(90deg);
+					transform: translate(-25%,-25%) rotate(90deg);
 				}
 			}
 		}
+
 	}
 
 	// .menu__submenu-list
 
 	&__submenu-list {
-		display: none;
+		opacity: 0;
+		visibility: hidden;
 		padding: 20px 0 0 20px;
-
+		transition: all 0.3s ease;
+		pointer-events: none;
 		li {
 			margin: 0 0 10px 0;
-
+			transform: translateY(50%);
+			transition: all 0.3s ease;
 			&:last-child {
 				margin: 0 0 0 0;
+			}
+		}
+		&._active{
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
+			li{
+				transform: translateX(0%);
 			}
 		}
 	}
@@ -362,7 +370,6 @@
 
 	&__list {
 		display: flex;
-
 		li:not(:last-child) {
 			margin: 0 27px 0 0;
 		}
@@ -376,6 +383,27 @@
 		font-size: 16px;
 		font-weight: 300;
 		text-transform: capitalize;
+		@media (min-width: $md2 + px) {
+			&.hide{
+				animation: hide-filter 0.4s ease forwards;
+			}
+		}
+		&.aside-link{
+			//color:
+		}
+	}
+}
+@keyframes hide-filter {
+	0%{
+		filter: blur(0px);
+	}
+	100%{
+		filter: blur(1px);
+	}
+}
+@keyframes show-active-link {
+	to{
+		font-weight: 400;
 	}
 }
 
@@ -403,6 +431,24 @@
 		font-size: 16px;
 		font-weight: 700;
 		text-transform: capitalize;
+		position: relative;
+		&:after{
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left:0;
+			width: 0;
+			height: 1px;
+			background-color: var(--color-third);
+			transition: width .3s ease;
+		}
+		@media (min-width: $md2 + px) {
+			&:hover{
+				&:after{
+					width: 100%;
+				}
+			}
+		}
 	}
 }
 
@@ -1143,7 +1189,7 @@
 
 //====================================================================================================
 .free-delivery {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	height: 25px;
@@ -1153,7 +1199,7 @@
 	align-items: center;
 	justify-content: center;
 	z-index: 6;
-	display: none;
+	//display: none;
 	// .free-delivery__text
 
 	&__text {
@@ -1175,5 +1221,6 @@
 		background-repeat: no-repeat;
 		background-size: contain;
 		cursor: pointer;
+		background-color: transparent;
 	}
 }
