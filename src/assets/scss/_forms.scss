@@ -295,7 +295,7 @@ textarea.input {
 		visibility: hidden;
 
 		&:checked+.checkbox__text:before {
-			background: #fff;
+			background-color: #fff;
 			background-image: url("data:image/svg+xml,%3Csvg width='14' height='10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13 1L4.75 9 1 5.364' stroke='%23212121' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 			background-position: center;
 			background-repeat: no-repeat;
@@ -323,8 +323,9 @@ textarea.input {
 			top: 0;
 			width: 20px;
 			height: 18px;
-			background: #fff;
+			background-color: #fff;
 			border: 1px solid #a7a9ac;
+			background-position: center;
 		}
 	}
 

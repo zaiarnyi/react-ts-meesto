@@ -344,6 +344,7 @@
 
 		&_color {
 			display: flex;
+			flex-wrap: wrap;
 		}
 
 		// .active-fliter__body_size
@@ -421,6 +422,7 @@
 	// .active-fliter__color
 
 	&__color {
+		flex:0 1 50%;
 		margin: 0 0 5px 0;
 
 		.checkbox__input:checked+.checkbox__text:before {

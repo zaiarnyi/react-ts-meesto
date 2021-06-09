@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { ProductTypeFilter } from "./FilterCatForm/ProductTypeFilter";
-import { ColorTypeFilter } from "./FilterCatForm/ColorTypeFilter";
-import { SizeTypeFilter } from "./FilterCatForm/SizeTypeFilter";
 import { PriceTypeFilter } from "./FilterCatForm/PriceTypeFilter";
 import { useFormik } from "formik";
 
@@ -57,7 +54,7 @@ export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
       product: {
         accessories: false,
         bags: false,
-        coats: true,
+        coats: false,
         hats: false,
         "jackets-and-bombers": false,
         "pants-and-jeans": false,
@@ -91,14 +88,16 @@ export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
         "50": false,
       },
     } as IInitValues,
-    onSubmit: (values, formikHelpers) => {},
+    onSubmit: (values, formikHelpers) => {
+      console.log(JSON.stringify(values, null, 2));
+    },
   });
 
   const onToggleHandler = () => {
     setActive((prevState) => !prevState);
   };
-  let name, value, checked;
-
+  let name, check;
+  console.log(formik.values);
   return (
     <div className={!active ? "item-filter" : "item-filter _active"}>
       <div className="item-filter__label" onClick={onToggleHandler}>
@@ -112,18 +111,16 @@ export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
               {Object.keys(formik.values.product).map((item) => {
                 name = item.split("")[0].toUpperCase();
                 name += item.substring(1);
-                // name
                 // @ts-ignore
-                checked = pformik.values.product[item];
+                check = formik.values.product[`${item}`];
                 return (
                   <div className="active-fliter__product" key={item}>
                     <label className="checkbox">
                       <input
                         type="checkbox"
-                        // value={formik.values.product}
-                        name={item}
-                        id={item}
-                        checked={checked}
+                        value={check}
+                        name={`product.${item}`}
+                        checked={check}
                         className="checkbox__input"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
@@ -137,17 +134,68 @@ export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
               })}
             </div>
           </div>
-          <ColorTypeFilter
-            color={formik.values.color}
-            blur={formik.handleBlur}
-            toggle={formik.handleChange}
-          />
-          <SizeTypeFilter
-            size={formik.values.size}
-            blur={formik.handleBlur}
-            toggle={formik.handleChange}
-          />
-          <PriceTypeFilter />
+          <div className="active-fliter__item">
+            <div className="active-fliter__title">Color</div>
+            <div className="active-fliter__body active-fliter__body_color">
+              {Object.keys(formik.values.color).map((item) => {
+                name = item.split("")[0].toUpperCase();
+                name += item.substring(1);
+                // @ts-ignore
+                check = formik.values.color[`${item}`];
+                return (
+                  <div className="active-fliter__color" key={item}>
+                    <label className="checkbox">
+                      <input
+                        type="checkbox"
+                        value={check}
+                        name={`color.${item}`}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        className="checkbox__input"
+                        checked={check}
+                      />
+                      <span className="checkbox__text">{name}</span>
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="active-fliter__item">
+            <div className="active-fliter__title">Size</div>
+            <div className="active-fliter__body active-fliter__body_size">
+              {Object.keys(formik.values.size).map((item) => {
+                // @ts-ignore
+                check = formik.values.size[item];
+                return (
+                  <div className="active-fliter__size" key={item}>
+                    <label className="checkbox">
+                      <input
+                        type="checkbox"
+                        value={check}
+                        checked={check}
+                        name={`size.${item}`}
+                        className="checkbox__input"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      />
+                      <span className="checkbox__text">
+                        {item.toUpperCase()}
+                      </span>
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="active-fliter__item">
+            <div className="active-fliter__title">Price</div>
+            <div className="active-fliter__body active-fliter__body_price">
+              <div className="active-fliter__slider">
+                <PriceTypeFilter max={20000} />
+              </div>
+            </div>
+          </div>
           <div className="active-fliter__item">
             <div className="active-fliter__body active-fliter__body_button">
               <button
