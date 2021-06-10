@@ -200,10 +200,18 @@
 		margin: 0 10px 0 0;
 		cursor: default;
 	}
+	// .aside-product__price-sale
+	&__price{
+		color: #424242;
+		font-size: 20px;
+		font-weight: 600;
+		margin: 0 10px 0 0;
+		cursor: default;
+	}
 
-	// .aside-product__price
+	// .aside-product__price-sale
 
-	&__price {
+	&__price-sale {
 		color: var(--color-third);
 		font-size: 20px;
 		font-weight: 600;
@@ -238,20 +246,21 @@
 		margin: 0 0 40px 0;
 	}
 
-	// .aside-product__deteils
+	// .aside-product__details
 
-	&__deteils {
+	&__details {
 		color: #757575;
 		font-size: 14px;
 		font-weight: 700;
 		text-decoration: underline;
 		margin: 0 20px 0 0;
+		background-color: transparent;
 	}
 
 	// .aside-product__size-guide
 
 	&__size-guide {
-		@extend .aside-product__deteils;
+		@extend .aside-product__details;
 		margin: 0 0 0 0;
 	}
 
@@ -261,7 +270,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin: 0 0 60px 0;
+		margin: 0 0 40px 0;
 
 		@media (max-width:$md3 + px) {
 			margin: 0 0 50px 0;
@@ -319,31 +328,42 @@
 		}
 
 		// .aside-product__image_black
-
 		&_black {
 			background: url(../../img/icons/color-1.jpg) 0 0 no-repeat;
-			//background: url(./src/assets/img/color-1.jpg) 0 0 no-repeat;
 		}
 
 		// .aside-product__image_red
-
 		&_red {
 			background: url(../../img/icons/color-2.jpg) 0 0 no-repeat;
-			//background: url(./src/assets/img/color-2.jpg) 0 0 no-repeat;
 		}
 
 		// .aside-product__image_white
-
 		&_white {
 			background: url(../../img/icons/color-3.jpg) 0 0 no-repeat;
-			//background: url(./src/assets/img/color-3.jpg) 0 0 no-repeat;
 		}
-
 		// .aside-product__image_blue
-
 		&_blue {
 			background: url(../../img/icons/color-4.jpg) 0 0 no-repeat;
-			//background: url(./src/assets/img/color-4.jpg) 0 0 no-repeat;
+		}
+		// .aside-product__image_green
+		&_green {
+			background: url(../../img/icons/color-4.jpg) 0 0 no-repeat;
+		}
+		// .aside-product__image_grey
+		&_grey {
+			background: url(../../img/icons/color-4.jpg) 0 0 no-repeat;
+		}
+		// .aside-product__image_brown
+		&_brown {
+			background: url(../../img/icons/color-4.jpg) 0 0 no-repeat;
+		}
+		// .aside-product__image_other
+		&_other {
+			background: url(../../img/icons/color-4.jpg) 0 0 no-repeat;
+		}
+		// .aside-product__image_yellow
+		&_yellow {
+			background: url(../../img/icons/color-4.jpg) 0 0 no-repeat;
 		}
 	}
 
@@ -400,19 +420,24 @@
 		justify-content: center;
 		align-items: center;
 		height: 46px;
-		background-color: #000000;
 		margin: 0 0 45px 0;
+
 	}
 
 	// .aside-product__btn
 
 	&__btn {
-		background-color: transparent;
+		background-color: #000000;
 		color: #fff;
 		font-size: 14px;
 		font-weight: 700;
 		width: 100%;
 		height: 100%;
+		pointer-events: auto;
+		&:disabled{
+			opacity: .6;
+			pointer-events: none;
+		}
 	}
 
 	// .aside-product__share
@@ -640,11 +665,9 @@
 				padding: 0 0 100% 0;
 			}
 		}
-
 		.hover-deals {
 			max-width: none;
 		}
-
 		.hover-deals__image {
 			padding: 0 0 117.38% 0;
 		}

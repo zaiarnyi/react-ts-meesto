@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { BreadCrumbs } from "../Catalog/Filters/BreadCrumbs/BreadCrumbs";
 import { FilterCatalog } from "../Catalog/Filters/FilterCatalog";
 import { DealsItem } from "../Home/Deals/DealsItem";
@@ -11,6 +10,7 @@ interface ICatalogProp {}
 const Catalog: React.FC<ICatalogProp> = (props) => {
   const [view, setView] = useState(3); // TODO заменить на данные из Redux
   const [isLoading, setIsLoading] = useState(false); // TODO заменить на данные из Redux
+
   return (
     <>
       <div className="page__breadcrumbs">
@@ -19,7 +19,6 @@ const Catalog: React.FC<ICatalogProp> = (props) => {
       <div className="page__filter">
         <FilterCatalog />
       </div>
-
       <div className="page__items-grid">
         <div className="grid-content">
           <div className="grid-content__items" data-grid-columns={view}>
