@@ -1,11 +1,11 @@
 import React from "react";
-import { ViewItems } from "./ViewItems";
-import { SortBy } from "./SortBy";
-import { FiltersForm } from "./FiltersForm";
+import { ViewItems } from "./ViewSort/ViewItems";
+import { SortBy } from "./ViewSort/SortBy";
+import { FiltersForm } from "./FilterCatForm/FiltersForm";
 
 interface IFilterItemsProp {}
 
-export const FilterCatalog: React.FC<IFilterItemsProp> = (props) => {
+export const FilterCatalog: React.FC<IFilterItemsProp> = React.memo((props) => {
   return (
     <div className={"filter-page"}>
       <div className="filter-page__items">
@@ -23,4 +23,4 @@ export const FilterCatalog: React.FC<IFilterItemsProp> = (props) => {
       </div>
     </div>
   );
-};
+});

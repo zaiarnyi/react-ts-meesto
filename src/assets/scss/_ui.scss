@@ -149,7 +149,7 @@ body.ie {
 }
 
 //====================================================================================================
-.price-slider {
+.active-fliter__slider {
 	height: 1px;
 	background-color: #bdbdbd;
 	position: relative;
@@ -218,6 +218,7 @@ body.ie {
 		color: #000000;
 		font-size: 14px;
 		font-weight: 700;
+		white-space: nowrap;
 	}
 }
 

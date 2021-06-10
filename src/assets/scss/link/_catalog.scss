@@ -778,29 +778,34 @@
 		color: #757575;
 		font-size: 14px;
 		position: relative;
-		padding: 0 0 18px 0;
 		margin: 0 0 25px 0;
 		cursor: default;
 
-		&::before {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 35px;
-			width: 190px;
-			height: 2px;
-			background-color: #bdbdbd;
-		}
+		//&::before {
+		//	content: '';
+		//	position: absolute;
+		//	bottom: 0;
+		//	left: 35px;
+		//	width: 190px;
+		//	height: 2px;
+		//	background-color: #bdbdbd;
+		//}
+		//
+		//&::after {
+		//	content: '';
+		//	position: absolute;
+		//	bottom: 0;
+		//	left: 35px;
+		//	width: 20px;
+		//	height: 2px;
+		//	background-color: var(--color-main);
+		//}
+	}
 
-		&::after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 35px;
-			width: 20px;
-			height: 2px;
-			background-color: var(--color-main);
-		}
+	// .item-load__progress
+
+	&__progress {
+		padding-top: 18px;
 	}
 
 	// .item-load__btn
@@ -810,10 +815,48 @@
 	}
 }
 
+.progress-load{
+	position: relative;
+	overflow: hidden;
+	progress{
+		position: absolute;
+		width: 0;
+		height: 0;
+		overflow: hidden;
+		left: 0;
+	}
+	&__bg{
+		background-color: #bdbdbd;
+		position: relative;
+		height: 2px;
+		border-radius: 5px;
+		overflow: hidden;
+	}
+	&__bar{
+		overflow: hidden;
+		background-color: var(--color-main);
+		width: 0;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		transition: width .3s ease;
+	}
+}
+@for $i from 0 through 100 {
+	.progress-load progress[value="#{$i}"]
+	{
+		& + .progress-load__value:before { content : '#{$i}%' }
+		& ~ .progress-load__bg .progress-load__bar { width: $i * 1% }
+	}
+}
+
+
 //====================================================================================================
 
 .tags-page {
-	padding: 60px 0;
+	//padding: 60px 0;
+	padding: 30px 0 40px 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;

@@ -42,7 +42,7 @@ export const HeaderMenu: React.FC<IHeaderMenuProp> = React.memo((props) => {
         <div className="menu__info info-menu">
           <InfoMenu />
         </div>
-        <div className="menu__socials socials-menu">
+        <div className="menu__socials">
           <SocialMenu />
         </div>
       </nav>

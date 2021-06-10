@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Select from "react-select";
 
 interface ISortByProp {}
@@ -7,31 +7,25 @@ interface defaultOptions {
   value: "desc" | "asc";
   label: string;
 }
-
 const options = [
   { value: "asc", label: "Lowest to Highest price" },
   { value: "desc", label: "Highest to Lowest price" },
 ] as Array<defaultOptions>;
-const sort = ["asc", "desc"];
 
 export const SortBy: React.FC<ISortByProp> = (props) => {
-  const [sort, setSort] = useState<string>("desc");
-
-  const onHandlerChange = (obj: defaultOptions | null) => {
-    if (obj !== null) {
-      console.log(obj);
-      setSort(obj.value);
-    }
-  };
   return (
     <div className="item-view__select">
       <Select
         className={"show"}
         classNamePrefix="select"
-        onChange={onHandlerChange}
+        onChange={(option) => {
+          console.log(option?.value);
+        }}
         name="sort"
         options={options}
         placeholder={"Sort by"}
+        isLoading={false}
+        isDisabled={false}
         styles={{
           control: (styles) => {
             return {

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { PriceTypeFilter } from "./FilterCatForm/PriceTypeFilter";
+import React, { useCallback, useEffect, useState } from "react";
+import { PriceTypeFilter } from "./PriceTypeFilter";
 import { useFormik } from "formik";
+import { useRef } from "react";
 
 export interface IProductFilter {
   accessories: boolean;
@@ -40,15 +41,17 @@ export interface ISizeFilter {
 }
 
 interface IFiltersFormProp {}
-
 interface IInitValues {
   product: IProductFilter;
   color: IColorFilter;
   size: ISizeFilter;
 }
 
-export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
+export const FiltersForm: React.FC<IFiltersFormProp> = React.memo((props) => {
   const [active, setActive] = useState(false);
+  const [currency, setCurrency] = useState("$"); // TODO заменить на данные из Redux
+  const [priceStart, setPriceStart] = useState<Array<number>>([0, 20000]); // TODO заменить на данные из Redux
+  const [priceCustom, setPriceCustom] = useState<Array<number>>([50, 10000]); // // TODO заменить на данные из Redux
   const formik = useFormik({
     initialValues: {
       product: {
@@ -89,17 +92,35 @@ export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
       },
     } as IInitValues,
     onSubmit: (values, formikHelpers) => {
-      console.log(JSON.stringify(values, null, 2));
+      const newValue = { ...values, priceCustom };
+      console.log(JSON.stringify(newValue, null, 2));
     },
   });
+  const filterRef = useRef(null);
+  useEffect(() => {
+    window.addEventListener("click", onHideHandler);
+    return () => {
+      window.addEventListener("click", onHideHandler); //TODO задиспатчить обнуление priceCustom
+    };
+  }, [active]);
 
+  //Func
   const onToggleHandler = () => {
     setActive((prevState) => !prevState);
   };
+  const onHideHandler = (e: any) => {
+    const path = e.path || (e.composedPath && e.composedPath());
+    if (!path.includes(filterRef.current) && active) {
+      setActive(false);
+      formik.handleSubmit();
+    }
+  };
   let name, check;
-  console.log(formik.values);
   return (
-    <div className={!active ? "item-filter" : "item-filter _active"}>
+    <div
+      className={!active ? "item-filter" : "item-filter _active"}
+      ref={filterRef}
+    >
       <div className="item-filter__label" onClick={onToggleHandler}>
         View filters
       </div>
@@ -108,11 +129,11 @@ export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
           <div className="active-fliter__item">
             <div className="active-fliter__title">Product type</div>
             <div className="active-fliter__body">
-              {Object.keys(formik.values.product).map((item) => {
+              {Object.keys(formik.values.product).map((item: string) => {
                 name = item.split("")[0].toUpperCase();
                 name += item.substring(1);
                 // @ts-ignore
-                check = formik.values.product[`${item}`];
+                check = formik.values.product[item];
                 return (
                   <div className="active-fliter__product" key={item}>
                     <label className="checkbox">
@@ -141,7 +162,7 @@ export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
                 name = item.split("")[0].toUpperCase();
                 name += item.substring(1);
                 // @ts-ignore
-                check = formik.values.color[`${item}`];
+                check = formik.values.color[item];
                 return (
                   <div className="active-fliter__color" key={item}>
                     <label className="checkbox">
@@ -192,7 +213,12 @@ export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
             <div className="active-fliter__title">Price</div>
             <div className="active-fliter__body active-fliter__body_price">
               <div className="active-fliter__slider">
-                <PriceTypeFilter max={20000} />
+                <PriceTypeFilter
+                  currency={currency}
+                  priceStart={priceStart}
+                  priceCustom={priceCustom}
+                  setPriceCustom={setPriceCustom}
+                />
               </div>
             </div>
           </div>
@@ -200,6 +226,7 @@ export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
             <div className="active-fliter__body active-fliter__body_button">
               <button
                 type="reset"
+                onClick={formik.handleReset}
                 className="active-fliter__btn active-fliter__btn_w"
               >
                 Clear Filters
@@ -216,4 +243,4 @@ export const FiltersForm: React.FC<IFiltersFormProp> = (props) => {
       </div>
     </div>
   );
-};
+});

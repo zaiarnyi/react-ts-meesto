@@ -4,7 +4,7 @@ interface IViewItemsProp {}
 const variable = [3, 4, 5];
 
 export const ViewItems: React.FC<IViewItemsProp> = (props) => {
-  const [view, setView] = useState(3);
+  const [view, setView] = useState(3); // TODO заменить на данные из Redux
 
   const onToggleVariable = (num: number) => {
     setView(num);
