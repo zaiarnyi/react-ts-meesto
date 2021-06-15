@@ -116,7 +116,7 @@ export const FiltersForm: React.FC<IFiltersFormProp> = React.memo((props) => {
       formik.handleSubmit();
     }
   };
-  let name, check;
+  let name;
   return (
     <div
       className={!active ? "item-filter" : "item-filter _active"}
@@ -131,21 +131,20 @@ export const FiltersForm: React.FC<IFiltersFormProp> = React.memo((props) => {
             <div className="active-fliter__title">Product type</div>
             <div className="active-fliter__body">
               {Object.keys(formik.values.product).map((item: string) => {
-                name = item.split("")[0].toUpperCase();
-                name += item.substring(1);
+                name = item[0].toUpperCase() + item.substring(1);
                 return (
                   <div className="active-fliter__product" key={item}>
                     <label className="checkbox">
                       <input
                         type="checkbox"
-                        value={formik.values.color[item].toString()}
-                        checked={formik.values.color[item]}
+                        value={String(formik.values.product[item])}
+                        checked={formik.values.product[item]}
                         name={`product.${item}`}
                         className="checkbox__input"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                       />
-                      <span className="checkbox__text">
+                      <span className="checkbox__text checkbox__text_filter">
                         {name} <span>102</span>
                       </span>
                     </label>
@@ -158,21 +157,22 @@ export const FiltersForm: React.FC<IFiltersFormProp> = React.memo((props) => {
             <div className="active-fliter__title">Color</div>
             <div className="active-fliter__body active-fliter__body_color">
               {Object.keys(formik.values.color).map((item) => {
-                name = item.split("")[0].toUpperCase();
-                name += item.substring(1);
+                name = item[0].toUpperCase() + item.substring(1);
                 return (
                   <div className="active-fliter__color" key={item}>
                     <label className="checkbox">
                       <input
                         type="checkbox"
-                        value={formik.values.color[item].toString()}
+                        value={String(formik.values.color[item])}
                         checked={formik.values.color[item]}
                         name={`color.${item}`}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         className="checkbox__input"
                       />
-                      <span className="checkbox__text">{name}</span>
+                      <span className="checkbox__text checkbox__text_filter">
+                        {name}
+                      </span>
                     </label>
                   </div>
                 );
@@ -188,15 +188,15 @@ export const FiltersForm: React.FC<IFiltersFormProp> = React.memo((props) => {
                     <label className="checkbox">
                       <input
                         type="checkbox"
-                        value={formik.values.color[item].toString()}
-                        checked={formik.values.color[item]}
+                        value={String(formik.values.size[item])}
+                        checked={formik.values.size[item]}
                         name={`size.${item}`}
                         className="checkbox__input"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                       />
-                      <span className="checkbox__text">
-                        {item.toUpperCase()}
+                      <span className="checkbox__text checkbox__text_filter checkbox__text_uppercase">
+                        {item}
                       </span>
                     </label>
                   </div>

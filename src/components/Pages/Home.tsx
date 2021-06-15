@@ -1,7 +1,7 @@
 import React from "react";
 import { FullSlider } from "../Home/FullSlider/FullSlider";
 import { Collections } from "../Home/Collections";
-import { Deals } from "../Home/Deals/Deals";
+import { Deals } from "../General/Deals/Deals";
 import { Sales } from "../Home/Sales";
 import { Looks } from "../Home/Looks/Looks";
 import { Subscribe } from "../Home/Subscribe";

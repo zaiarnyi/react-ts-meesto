@@ -1,18 +1,4 @@
 import React from "react";
-import deals1WEBP from "../../../assets/img/deals/1.webp";
-import deals1JPG from "../../../assets/img/deals/1.jpg";
-import dealsHover1JPG from "../../../assets/img/deals/hover/1.jpg";
-import dealsHover1WEBP from "../../../assets/img/deals/hover/1.webp";
-import deals2WEBP from "../../../assets/img/deals/2.webp";
-import deals2JPG from "../../../assets/img/deals/2.jpg";
-import deals3WEBP from "../../../assets/img/deals/3.webp";
-import deals3JPG from "../../../assets/img/deals/3.jpg";
-import deals4WEBP from "../../../assets/img/deals/4.webp";
-import deals4JPG from "../../../assets/img/deals/4.jpg";
-import deals5WEBP from "../../../assets/img/deals/5.webp";
-import deals5JPG from "../../../assets/img/deals/5.jpg";
-import deals6WEBP from "../../../assets/img/deals/6.webp";
-import deals6JPG from "../../../assets/img/deals/6.jpg";
 import { DealsItem } from "./DealsItem";
 
 interface IDealsProp {}

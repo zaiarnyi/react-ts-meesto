@@ -4,7 +4,7 @@ import SwiperCore, { Navigation, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/swiper.scss";
-import { DealsItem } from "../../Home/Deals/DealsItem";
+import { DealsItem } from "../../General/Deals/DealsItem";
 // install Swiper modules
 SwiperCore.use([Navigation, Autoplay]);
 
@@ -12,7 +12,7 @@ interface ISliderProductProp {}
 
 export const SliderProduct: React.FC<ISliderProductProp> = (props) => {
   return (
-    <div className="products-page__slider slider-product">
+    <div className="slider-product">
       <div className="slider-product__container _container">
         <div className="slider-product__items _swiper">
           <Swiper
@@ -32,6 +32,21 @@ export const SliderProduct: React.FC<ISliderProductProp> = (props) => {
             keyboard={{ enabled: true, onlyInViewport: false }}
             speed={800}
             parallax={true}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 0,
+              },
+              // when window width is >= 480px
+              500: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+            }}
           >
             <SwiperSlide>
               <DealsItem />

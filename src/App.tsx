@@ -23,7 +23,7 @@ function App() {
   const [delivery, setDelivery] = useState(true);
   return (
     <Router>
-      <div className="wrapper">
+      <>
         <AlertAdvertising delivery={delivery} toggleDelivery={setDelivery} />
         <Header delivery={delivery} />
         <main className="page">
@@ -31,7 +31,7 @@ function App() {
             <Switch>
               <Route path={"/"} exact component={Home} />
               <Route
-                path={"/catalog/:gender/:category?"}
+                path={"/catalog/:gender?/:category?"}
                 exact
                 component={Catalog}
               />
@@ -44,7 +44,7 @@ function App() {
           </React.Suspense>
         </main>
         <Footer />
-      </div>
+      </>
     </Router>
   );
 }

@@ -18,12 +18,6 @@ export const DealsItem: React.FC<IDealsItemProp> = (props) => {
   const { gender, category, product } = useParams<Required<IParamsCatalog>>();
   const name = "Poke flannel marfa swag slow-carb narwhal"; //TODO Получить все данные
   const linkName = name.split(" ").join("-").toLowerCase();
-  const link =
-    gender && category
-      ? `/catalog/${gender}/${category}/${linkName}`
-      : gender && !category
-      ? `/catalog/${gender}/${linkName}`
-      : "/";
 
   return (
     <div className="item-deals">
@@ -34,7 +28,10 @@ export const DealsItem: React.FC<IDealsItemProp> = (props) => {
               (freeShip ? "Free Shipping" : null) ||
               (newThing ? "New In" : null)}
           </span>
-          <Link to={link} className="item-deals__image _ibg">
+          <Link
+            to={`/catalog/men/shoes/${linkName}`}
+            className="item-deals__image _ibg"
+          >
             <picture>
               <source srcSet={deals1WEBP} type="image/webp" />
               <img src={deals1JPG} alt="content picture" />
@@ -42,7 +39,10 @@ export const DealsItem: React.FC<IDealsItemProp> = (props) => {
           </Link>
         </div>
         <div className="item-deals__body">
-          <Link to={link} className="item-deals__label">
+          <Link
+            to={`/catalog/men/shoes/${linkName}`}
+            className="item-deals__label"
+          >
             {name}
           </Link>
           <div className="item-deals__price-block">
@@ -62,7 +62,10 @@ export const DealsItem: React.FC<IDealsItemProp> = (props) => {
       <div className="item-deals__hover">
         <div className="hover-deals">
           <div className="hover-deals__top">
-            <Link to={link} className="hover-deals__image _ibg">
+            <Link
+              to={`/catalog/men/shoes/${linkName}`}
+              className="hover-deals__image _ibg"
+            >
               <picture>
                 <source srcSet={dealsHover1WEBP} type="image/webp" />
                 <img src={dealsHover1JPG} alt="content picture" />
@@ -70,7 +73,10 @@ export const DealsItem: React.FC<IDealsItemProp> = (props) => {
             </Link>
           </div>
           <div className="hover-deals__body">
-            <Link to={link} className="hover-deals__btn btn-anim">
+            <Link
+              to={`/catalog/men/shoes/${linkName}`}
+              className="hover-deals__btn btn-anim"
+            >
               add
             </Link>
           </div>

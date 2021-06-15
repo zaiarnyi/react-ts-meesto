@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BreadCrumbs } from "../Catalog/Filters/BreadCrumbs/BreadCrumbs";
 import { FilterCatalog } from "../Catalog/Filters/FilterCatalog";
-import { DealsItem } from "../Home/Deals/DealsItem";
+import { DealsItem } from "../General/Deals/DealsItem";
 import { LoadCatalog } from "../Catalog/LoadCatalog/LoadCatalog";
 import { TagsCatalog } from "../Catalog/TagsCatalog/TagsCatalog";
 

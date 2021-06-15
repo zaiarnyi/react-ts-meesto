@@ -16,13 +16,15 @@ export const BreadCrumbs: React.FC<IBreadCrumbsProp> = React.memo((props) => {
             </Link>
           </li>
           {Object.values(params).map((item) => {
-            return (
-              <li key={item}>
-                <Link to={`/catalog/${item}`} className="breadcrumbs__link">
-                  {item}
-                </Link>
-              </li>
-            );
+            if (item) {
+              return (
+                <li key={item}>
+                  <Link to={`/catalog/${item}`} className="breadcrumbs__link">
+                    {item.split("-").join(" ")}
+                  </Link>
+                </li>
+              );
+            }
           })}
         </ul>
       </div>
