@@ -37,31 +37,6 @@
 	// .products-page__slider
 
 	&__slider {}
-
-	// .products-page__toggle
-
-	&__toggle {
-		&-enter {
-			opacity: 0;
-			//transform: scale(0.9);
-			transform: translateY(-10%);
-		}
-		&-enter-active {
-			opacity: 1;
-			//transform: translateX(0);
-			transform: translateY(0%);
-			transition: opacity 800ms, transform 800ms;
-		}
-		&-exit {
-			opacity: 1;
-		}
-		&-exit-active {
-			opacity: 0;
-			//transform: scale(0.9);
-			transform: translateY(-10%);
-			transition: opacity 800ms, transform 800ms;
-		}
-	}
 }
 
 

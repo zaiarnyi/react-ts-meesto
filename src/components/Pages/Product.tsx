@@ -296,7 +296,7 @@ export const Product: React.FC<IProductProp> = React.memo((props) => {
                         in={productBlock}
                         timeout={300}
                         unmountOnExit
-                        classNames="products-page__toggle"
+                        classNames="toggle-anim"
                         nodeRef={nodeProductRef}
                       >
                         <div
@@ -368,7 +368,7 @@ export const Product: React.FC<IProductProp> = React.memo((props) => {
                         in={infoBlock}
                         timeout={300}
                         unmountOnExit
-                        classNames="products-page__toggle"
+                        classNames="toggle-anim"
                         nodeRef={nodeInfoRef}
                       >
                         <div

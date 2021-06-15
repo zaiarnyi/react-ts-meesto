@@ -6,7 +6,6 @@ interface IAlertAdvertisingProp {
 }
 
 export const AlertAdvertising: React.FC<IAlertAdvertisingProp> = (props) => {
-  // const [delivery, setDelivery] = useState(true);
   const onToggleHandler = () => {
     props.toggleDelivery(false);
   };

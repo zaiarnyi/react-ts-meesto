@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header } from "./components/General/Header/Header";
 import { AlertAdvertising } from "./components/General/AlertAdvertising";
 import { Footer } from "./components/General/Footer";
 import { Home } from "./components/Pages/Home";
 import { NoMatch } from "./components/Pages/NoMatch";
 import { Product } from "./components/Pages/Product";
+import { Checkout } from "./components/Pages/Checkout";
+
 const Catalog = React.lazy(() => import("./components/Pages/Catalog"));
 
 export interface IParamsCatalog {
@@ -21,6 +18,7 @@ export interface IParamsCatalog {
 
 function App() {
   const [delivery, setDelivery] = useState(true);
+
   return (
     <Router>
       <>
@@ -39,6 +37,7 @@ function App() {
                 path={"/catalog/:gender/:category/:product"}
                 component={Product}
               />
+              <Route path={"/checkout"} exact component={Checkout} />
               <Route path={"*"} exact component={NoMatch} />
             </Switch>
           </React.Suspense>

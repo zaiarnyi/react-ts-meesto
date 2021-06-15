@@ -27,7 +27,9 @@ export const LoadCatalog: React.FC<ILoadCatalogProp> = React.memo((props) => {
       {!props.isLoading ? (
         <button className="item-load__btn btn-anim">Load More</button>
       ) : (
-        <Loading />
+        <div className={"item-load__loading"}>
+          <Loading />
+        </div>
       )}
     </div>
   );
