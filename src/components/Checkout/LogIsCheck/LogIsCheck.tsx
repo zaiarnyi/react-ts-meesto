@@ -1,7 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-import Yup from "yup";
+import * as Yup from "yup";
 
 interface ILogIsCheckProp {}
 interface IInitValues {
