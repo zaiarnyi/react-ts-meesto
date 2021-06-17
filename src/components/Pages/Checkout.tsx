@@ -6,8 +6,12 @@ import { LogIsCheck } from "../Checkout/LogIsCheck/LogIsCheck";
 import * as Yup from "yup";
 import card from "../../assets/img/icons/mastercard.png";
 import cardWEBP from "../../assets/img/icons/mastercard.webp";
+import payCardWEB from "../../assets/img/icons/PayPal.webp";
+import payCard from "../../assets/img/icons/PayPal.png";
 import { Link } from "react-router-dom";
 import Select from "react-select";
+import { CustomInput } from "../Checkout/CustomForm/CustomInput";
+import { CustomSelect } from "../Checkout/CustomForm/CustomSelect";
 
 interface ICheckoutProp {}
 interface IInitValuesCheck {
@@ -43,7 +47,7 @@ interface IInitValuesCheck {
   diffAddress: boolean;
   createAcc: boolean;
 }
-interface IOptionsSelectCountry {
+export interface IOptionsSelectCountry {
   value: string;
   label: string;
 }
@@ -104,8 +108,8 @@ const payBy = [
   {
     label: "PayPal",
     description: "крупнейшая дебетовая электронная платёжная система.",
-    image: card,
-    imageWEBP: cardWEBP,
+    image: payCard,
+    imageWEBP: payCardWEB,
   },
 ];
 const country = ["ukraine", "france", "italy", "spain"];
@@ -263,7 +267,6 @@ const Checkout: React.FC<ICheckoutProp> = (props) => {
                     checked={formik.values.isCoupon}
                     name="isCoupon"
                     onChange={formik.handleChange}
-                    // onBlur={formik.handleBlur}
                     className="checkbox__input"
                   />
                   <span className="checkbox__text">I have a coupon code</span>
@@ -306,277 +309,148 @@ const Checkout: React.FC<ICheckoutProp> = (props) => {
                 1. Shipping
               </div>
               <div className="checkout-data__row">
-                <div className="checkout-data__title checkout-text">Email*</div>
-                <div className="checkout-data__input">
-                  <input
-                    autoComplete="off"
-                    type="text"
-                    name="shipEmail"
-                    value={formik.values.shipEmail}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    className="input"
-                    autoFocus
+                <CustomInput
+                  title={"Email*"}
+                  name={"shipEmail"}
+                  value={formik.values.shipEmail}
+                  change={formik.handleChange}
+                  blur={formik.handleBlur}
+                  error={formik.errors.shipEmail || ""}
+                  touched={formik.touched.shipEmail || false}
+                  autofocus={true}
+                />
+              </div>
+              <div className="checkout-data__body-input">
+                <div className="checkout-data__first-input">
+                  <CustomInput
+                    title={"First name*"}
+                    name={"shipFirstName"}
+                    value={formik.values.shipFirstName}
+                    change={formik.handleChange}
+                    blur={formik.handleBlur}
+                    error={formik.errors.shipFirstName || ""}
+                    touched={formik.touched.shipFirstName || false}
                   />
-                  {formik.errors.shipEmail && formik.touched.shipEmail && (
-                    <div className={"checkout-error"}>
-                      {formik.errors.shipEmail}
-                    </div>
-                  )}
+                </div>
+                <div className="checkout-data__second-input">
+                  <CustomInput
+                    title={"Last name*"}
+                    name={"shipLastName"}
+                    value={formik.values.shipLastName}
+                    change={formik.handleChange}
+                    blur={formik.handleBlur}
+                    error={formik.errors.shipLastName || ""}
+                    touched={formik.touched.shipLastName || false}
+                  />
                 </div>
               </div>
               <div className="checkout-data__body-input">
                 <div className="checkout-data__first-input">
-                  <div className="checkout-data__title checkout-text">
-                    First name*
-                  </div>
-                  <div className="checkout-data__input">
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      name="shipFirstName"
-                      value={formik.values.shipFirstName}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      className="input"
-                    />
-                    {formik.errors.shipFirstName &&
-                      formik.touched.shipFirstName && (
-                        <div className={"checkout-error"}>
-                          {formik.errors.shipFirstName}
-                        </div>
-                      )}
-                  </div>
+                  <CustomInput
+                    title={"Phone*"}
+                    name={"shipPhone"}
+                    value={formik.values.shipPhone}
+                    change={formik.handleChange}
+                    blur={formik.handleBlur}
+                    error={formik.errors.shipPhone || ""}
+                    touched={formik.touched.shipPhone || false}
+                  />
                 </div>
                 <div className="checkout-data__second-input">
-                  <div className="checkout-data__title checkout-text">
-                    Last name*
-                  </div>
-                  <div className="checkout-data__input">
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      name="shipLastName"
-                      value={formik.values.shipLastName}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      className="input"
-                    />
-                    {formik.errors.shipLastName &&
-                      formik.touched.shipLastName && (
-                        <div className={"checkout-error"}>
-                          {formik.errors.shipLastName}
-                        </div>
-                      )}
-                  </div>
+                  <CustomInput
+                    title={"Company name"}
+                    name={"shipCompany"}
+                    value={formik.values.shipCompany}
+                    change={formik.handleChange}
+                    blur={formik.handleBlur}
+                    error={formik.errors.shipCompany || ""}
+                    touched={formik.touched.shipCompany || false}
+                  />
                 </div>
               </div>
               <div className="checkout-data__body-input">
                 <div className="checkout-data__first-input">
-                  <div className="checkout-data__title checkout-text">
-                    Phone*
-                  </div>
-                  <div className="checkout-data__input">
-                    <input
-                      autoComplete="off"
-                      type="tel"
-                      name="shipPhone"
-                      value={formik.values.shipPhone}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      className="input"
-                    />
-                    {formik.errors.shipPhone && formik.touched.shipPhone && (
-                      <div className={"checkout-error"}>
-                        {formik.errors.shipPhone}
-                      </div>
-                    )}
-                  </div>
+                  <CustomSelect
+                    title={"Country*"}
+                    name={"shipCountry"}
+                    options={optionsCountry}
+                    value={formik.values.shipCountry}
+                    changeFunc={formik.setFieldValue}
+                  />
                 </div>
                 <div className="checkout-data__second-input">
-                  <div className="checkout-data__title checkout-text">
-                    Company name
-                  </div>
-                  <div className="checkout-data__input">
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      name="shipCompany"
-                      value={formik.values.shipCompany}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      className="input"
-                    />
-                    {formik.errors.shipCompany &&
-                      formik.touched.shipCompany && (
-                        <div className={"checkout-error"}>
-                          {formik.errors.shipCompany}
-                        </div>
-                      )}
-                  </div>
-                </div>
-              </div>
-              <div className="checkout-data__body-input">
-                <div className="checkout-data__first-input">
-                  <div className="checkout-data__title checkout-text">
-                    Country*
-                  </div>
-                  <div className="checkout-data__select">
-                    <Select
-                      type={"text"}
-                      id={"shipCountry"}
-                      // defaultValue={optionsCountry[0]}
-                      value={formik.values.shipCountry}
-                      className={"country"}
-                      name={"shipCountry"}
-                      options={optionsCountry}
-                      onChange={(option) => {
-                        formik.setFieldValue("shipCountry", option);
-                      }}
-                      styles={{
-                        control: (base, props) => {
-                          return { ...base, minHeight: 47, top: 2 };
-                        },
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="checkout-data__second-input">
-                  <div className="checkout-data__title checkout-text">
-                    Zip code*
-                  </div>
-                  <div className="checkout-data__input">
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      name="shipZipCode"
-                      value={formik.values.shipZipCode}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      className="input"
-                    />
-                    {formik.errors.shipZipCode &&
-                      formik.touched.shipZipCode && (
-                        <div className={"checkout-error"}>
-                          {formik.errors.shipZipCode}
-                        </div>
-                      )}
-                  </div>
+                  <CustomInput
+                    title={"Zip code*"}
+                    name={"shipZipCode"}
+                    value={formik.values.shipZipCode}
+                    change={formik.handleChange}
+                    blur={formik.handleBlur}
+                    error={formik.errors.shipZipCode || ""}
+                    touched={formik.touched.shipZipCode || false}
+                  />
                 </div>
               </div>
               <div className="checkout-data__body-input">
                 <div className="checkout-data__first-input">
                   <div className="checkout-data__small-body">
                     <div className="checkout-data__small-block">
-                      <div className="checkout-data__title checkout-text">
-                        House number*
-                      </div>
-                      <div className="checkout-data__input">
-                        <input
-                          autoComplete="off"
-                          type="text"
-                          name="shipHouse"
-                          value={formik.values.shipHouse}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          className="input"
-                        />
-                        {formik.errors.shipHouse &&
-                          formik.touched.shipHouse && (
-                            <div className={"checkout-error"}>
-                              {formik.errors.shipHouse}
-                            </div>
-                          )}
-                      </div>
+                      <CustomInput
+                        title={"House number*"}
+                        name={"shipHouse"}
+                        value={formik.values.shipHouse}
+                        change={formik.handleChange}
+                        blur={formik.handleBlur}
+                        error={formik.errors.shipHouse || ""}
+                        touched={formik.touched.shipHouse || false}
+                      />
                     </div>
                     <div className="checkout-data__small-block">
-                      <div className="checkout-data__title checkout-text">
-                        Apartment (suit, unit etc.)
-                      </div>
-                      <div className="checkout-data__input">
-                        <input
-                          autoComplete="off"
-                          type="text"
-                          name="shipApartment"
-                          value={formik.values.shipApartment}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          className="input"
-                        />
-                        {formik.errors.shipApartment &&
-                          formik.touched.shipApartment && (
-                            <div className={"checkout-error"}>
-                              {formik.errors.shipApartment}
-                            </div>
-                          )}
-                      </div>
+                      <CustomInput
+                        title={"Apartment (suit, unit etc.)"}
+                        name={"shipApartment"}
+                        value={formik.values.shipApartment}
+                        change={formik.handleChange}
+                        blur={formik.handleBlur}
+                        error={formik.errors.shipApartment || ""}
+                        touched={formik.touched.shipApartment || false}
+                      />
                     </div>
                   </div>
                 </div>
                 <div className="checkout-data__second-input">
-                  <div className="checkout-data__title checkout-text">
-                    Street name*
-                  </div>
-                  <div className="checkout-data__input">
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      name="shipStreet"
-                      value={formik.values.shipStreet}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      className="input"
-                    />
-                    {formik.errors.shipStreet && formik.touched.shipStreet && (
-                      <div className={"checkout-error"}>
-                        {formik.errors.shipStreet}
-                      </div>
-                    )}
-                  </div>
+                  <CustomInput
+                    title={"Street name*"}
+                    name={"shipStreet"}
+                    value={formik.values.shipStreet}
+                    change={formik.handleChange}
+                    blur={formik.handleBlur}
+                    error={formik.errors.shipStreet || ""}
+                    touched={formik.touched.shipStreet || false}
+                  />
                 </div>
               </div>
               <div className="checkout-data__body-input">
                 <div className="checkout-data__first-input">
-                  <div className="checkout-data__title checkout-text">
-                    City*
-                  </div>
-                  <div className="checkout-data__input">
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      name="shipCity"
-                      value={formik.values.shipCity}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      className="input"
-                    />
-                    {formik.errors.shipCity && formik.touched.shipCity && (
-                      <div className={"checkout-error"}>
-                        {formik.errors.shipCity}
-                      </div>
-                    )}
-                  </div>
+                  <CustomInput
+                    title={"City*"}
+                    name={"shipCity"}
+                    value={formik.values.shipCity}
+                    change={formik.handleChange}
+                    blur={formik.handleBlur}
+                    error={formik.errors.shipCity || ""}
+                    touched={formik.touched.shipCity || false}
+                  />
                 </div>
                 <div className="checkout-data__second-input">
-                  <div className="checkout-data__title checkout-text">
-                    State*
-                  </div>
-                  <div className="checkout-data__input">
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      name="shipState"
-                      value={formik.values.shipState}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      className="input"
-                    />
-                    {formik.errors.shipState && formik.touched.shipState && (
-                      <div className={"checkout-error"}>
-                        {formik.errors.shipState}
-                      </div>
-                    )}
-                  </div>
+                  <CustomInput
+                    title={"State*"}
+                    name={"shipState"}
+                    value={formik.values.shipState}
+                    change={formik.handleChange}
+                    blur={formik.handleBlur}
+                    error={formik.errors.shipState || ""}
+                    touched={formik.touched.shipState || false}
+                  />
                 </div>
               </div>
               <div className="checkout-data__row checkout-data__row_check">
@@ -625,299 +499,170 @@ const Checkout: React.FC<ICheckoutProp> = (props) => {
                   2. Billing
                 </div>
                 <div className="checkout-data__row">
-                  <div className="checkout-data__title checkout-text">
-                    Email*
-                  </div>
-                  <div className="checkout-data__input">
-                    <input
-                      autoComplete="off"
-                      type="text"
-                      name="billEmail"
-                      defaultValue={formik.values.shipEmail}
-                      value={formik.values.billEmail}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      className="input"
-                      autoFocus
+                  <CustomInput
+                    title={"Email*"}
+                    name={"billEmail"}
+                    defaultValue={formik.values.shipEmail}
+                    value={formik.values.billEmail || ""}
+                    change={formik.handleChange}
+                    blur={formik.handleBlur}
+                    error={formik.errors.billEmail || ""}
+                    touched={formik.touched.billEmail || false}
+                    autofocus={true}
+                  />
+                </div>
+                <div className="checkout-data__body-input">
+                  <div className="checkout-data__first-input">
+                    <CustomInput
+                      title={"First name*"}
+                      name={"billFirstName"}
+                      defaultValue={formik.values.shipFirstName || ""}
+                      value={formik.values.billFirstName || ""}
+                      change={formik.handleChange}
+                      blur={formik.handleBlur}
+                      error={formik.errors.billFirstName || ""}
+                      touched={formik.touched.billFirstName || false}
+                      autofocus={true}
                     />
-                    {formik.errors.billEmail && formik.touched.billEmail && (
-                      <div className={"checkout-error"}>
-                        {formik.errors.billEmail}
-                      </div>
-                    )}
+                  </div>
+                  <div className="checkout-data__second-input">
+                    <CustomInput
+                      title={"Last name*"}
+                      name={"billLastName"}
+                      defaultValue={formik.values.shipLastName || ""}
+                      value={formik.values.billLastName || ""}
+                      change={formik.handleChange}
+                      blur={formik.handleBlur}
+                      error={formik.errors.billLastName || ""}
+                      touched={formik.touched.billLastName || false}
+                      autofocus={true}
+                    />
                   </div>
                 </div>
                 <div className="checkout-data__body-input">
                   <div className="checkout-data__first-input">
-                    <div className="checkout-data__title checkout-text">
-                      First name*
-                    </div>
-                    <div className="checkout-data__input">
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        name="billFirstName"
-                        defaultValue={formik.values.shipFirstName}
-                        value={formik.values.billFirstName}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className="input"
-                        autoFocus
-                      />
-                      {formik.errors.billFirstName &&
-                        formik.touched.billFirstName && (
-                          <div className={"checkout-error"}>
-                            {formik.errors.billFirstName}
-                          </div>
-                        )}
-                    </div>
+                    <CustomInput
+                      title={"Phone"}
+                      name={"billPhone"}
+                      defaultValue={formik.values.shipPhone || ""}
+                      value={formik.values.billPhone || ""}
+                      change={formik.handleChange}
+                      blur={formik.handleBlur}
+                      error={formik.errors.billPhone || ""}
+                      touched={formik.touched.billPhone || false}
+                      autofocus={true}
+                    />
                   </div>
                   <div className="checkout-data__second-input">
-                    <div className="checkout-data__title checkout-text">
-                      Last name*
-                    </div>
-                    <div className="checkout-data__input">
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        name="billLastName"
-                        defaultValue={formik.values.shipLastName}
-                        value={formik.values.billLastName}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className="input"
-                        autoFocus
-                      />
-                      {formik.errors.billLastName &&
-                        formik.touched.billLastName && (
-                          <div className={"checkout-error"}>
-                            {formik.errors.billLastName}
-                          </div>
-                        )}
-                    </div>
+                    <CustomInput
+                      title={"Company name"}
+                      name={"billCompany"}
+                      defaultValue={formik.values.shipCompany || ""}
+                      value={formik.values.billCompany || ""}
+                      change={formik.handleChange}
+                      blur={formik.handleBlur}
+                      error={formik.errors.billCompany || ""}
+                      touched={formik.touched.billCompany || false}
+                      autofocus={true}
+                    />
                   </div>
                 </div>
                 <div className="checkout-data__body-input">
                   <div className="checkout-data__first-input">
-                    <div className="checkout-data__title checkout-text">
-                      Phone
-                    </div>
-                    <div className="checkout-data__input">
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        name="billPhone"
-                        defaultValue={formik.values.shipPhone}
-                        value={formik.values.billPhone}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className="input"
-                      />
-                      {formik.errors.billPhone && formik.touched.billPhone && (
-                        <div className={"checkout-error"}>
-                          {formik.errors.billPhone}
-                        </div>
-                      )}
-                    </div>
+                    <CustomSelect
+                      title={"Country*"}
+                      name={"billCountry"}
+                      options={optionsCountry}
+                      defaultValue={formik.values.shipCountry}
+                      value={formik.values.billCountry}
+                      changeFunc={formik.setFieldValue}
+                    />
                   </div>
                   <div className="checkout-data__second-input">
-                    <div className="checkout-data__title checkout-text">
-                      Company name
-                    </div>
-                    <div className="checkout-data__input">
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        name="billCompany"
-                        defaultValue={formik.values.shipCompany}
-                        value={formik.values.billCompany}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className="input"
-                      />
-                      {formik.errors.billCompany &&
-                        formik.touched.billCompany && (
-                          <div className={"checkout-error"}>
-                            {formik.errors.billCompany}
-                          </div>
-                        )}
-                    </div>
-                  </div>
-                </div>
-                <div className="checkout-data__body-input">
-                  <div className="checkout-data__first-input">
-                    <div className="checkout-data__title checkout-text">
-                      Country*
-                    </div>
-                    <div className="checkout-data__select">
-                      <Select
-                        type={"text"}
-                        id={"billCountry"}
-                        defaultValue={formik.values.shipCountry}
-                        value={formik.values.billCountry}
-                        className={"country"}
-                        name={"billCountry"}
-                        options={optionsCountry}
-                        onChange={(option) => {
-                          formik.setFieldValue("billCountry", option);
-                        }}
-                        styles={{
-                          control: (base, props) => {
-                            return { ...base, minHeight: 47, top: 2 };
-                          },
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div className="checkout-data__second-input">
-                    <div className="checkout-data__title checkout-text">
-                      Zip code*
-                    </div>
-                    <div className="checkout-data__input">
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        name="billZipCode"
-                        defaultValue={formik.values.shipZipCode}
-                        value={formik.values.billZipCode}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className="input"
-                        autoFocus
-                      />
-                      {formik.errors.billZipCode &&
-                        formik.touched.billZipCode && (
-                          <div className={"checkout-error"}>
-                            {formik.errors.billZipCode}
-                          </div>
-                        )}
-                    </div>
+                    <CustomInput
+                      title={"Zip code*"}
+                      name={"billZipCode"}
+                      defaultValue={formik.values.shipZipCode || ""}
+                      value={formik.values.billZipCode || ""}
+                      change={formik.handleChange}
+                      blur={formik.handleBlur}
+                      error={formik.errors.billZipCode || ""}
+                      touched={formik.touched.billZipCode || false}
+                      autofocus={true}
+                    />
                   </div>
                 </div>
                 <div className="checkout-data__body-input">
                   <div className="checkout-data__first-input">
                     <div className="checkout-data__small-body">
                       <div className="checkout-data__small-block">
-                        <div className="checkout-data__title checkout-text">
-                          House number*
-                        </div>
-                        <div className="checkout-data__input">
-                          <input
-                            autoComplete="off"
-                            type="text"
-                            name="billHouse"
-                            defaultValue={formik.values.shipHouse}
-                            value={formik.values.billHouse}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            className="input"
-                            autoFocus
-                          />
-                          {formik.errors.billHouse &&
-                            formik.touched.billHouse && (
-                              <div className={"checkout-error"}>
-                                {formik.errors.billHouse}
-                              </div>
-                            )}
-                        </div>
+                        <CustomInput
+                          title={"House number*"}
+                          name={"billHouse"}
+                          defaultValue={formik.values.shipHouse || ""}
+                          value={formik.values.billHouse || ""}
+                          change={formik.handleChange}
+                          blur={formik.handleBlur}
+                          error={formik.errors.billHouse || ""}
+                          touched={formik.touched.billHouse || false}
+                          autofocus={true}
+                        />
                       </div>
                       <div className="checkout-data__small-block">
-                        <div className="checkout-data__title checkout-text">
-                          Apartment (suit, unit etc.)
-                        </div>
-                        <div className="checkout-data__input">
-                          <input
-                            autoComplete="off"
-                            type="text"
-                            name="billApartment"
-                            defaultValue={formik.values.shipApartment}
-                            value={formik.values.billApartment}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            className="input"
-                            autoFocus
-                          />
-                          {formik.errors.billApartment &&
-                            formik.touched.billApartment && (
-                              <div className={"checkout-error"}>
-                                {formik.errors.billApartment}
-                              </div>
-                            )}
-                        </div>
+                        <CustomInput
+                          title={"Apartment (suit, unit etc.)"}
+                          name={"billApartment"}
+                          defaultValue={formik.values.shipApartment || ""}
+                          value={formik.values.billApartment || ""}
+                          change={formik.handleChange}
+                          blur={formik.handleBlur}
+                          error={formik.errors.billApartment || ""}
+                          touched={formik.touched.billApartment || false}
+                          autofocus={true}
+                        />
                       </div>
                     </div>
                   </div>
                   <div className="checkout-data__second-input">
-                    <div className="checkout-data__title checkout-text">
-                      Street name*
-                    </div>
-                    <div className="checkout-data__input">
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        name="billStreet"
-                        defaultValue={formik.values.shipStreet}
-                        value={formik.values.billStreet}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className="input"
-                        autoFocus
-                      />
-                      {formik.errors.billStreet &&
-                        formik.touched.billStreet && (
-                          <div className={"checkout-error"}>
-                            {formik.errors.billStreet}
-                          </div>
-                        )}
-                    </div>
+                    <CustomInput
+                      title={"Street name*"}
+                      name={"billStreet"}
+                      defaultValue={formik.values.shipStreet || ""}
+                      value={formik.values.billStreet || ""}
+                      change={formik.handleChange}
+                      blur={formik.handleBlur}
+                      error={formik.errors.billStreet || ""}
+                      touched={formik.touched.billStreet || false}
+                      autofocus={true}
+                    />
                   </div>
                 </div>
                 <div className="checkout-data__body-input">
                   <div className="checkout-data__first-input">
-                    <div className="checkout-data__title checkout-text">
-                      City*
-                    </div>
-                    <div className="checkout-data__input">
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        name="billCity"
-                        defaultValue={formik.values.shipCity}
-                        value={formik.values.billCity}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className="input"
-                        autoFocus
-                      />
-                      {formik.errors.billCity && formik.touched.billCity && (
-                        <div className={"checkout-error"}>
-                          {formik.errors.billCity}
-                        </div>
-                      )}
-                    </div>
+                    <CustomInput
+                      title={"City*"}
+                      name={"billCity"}
+                      defaultValue={formik.values.shipCity || ""}
+                      value={formik.values.billCity || ""}
+                      change={formik.handleChange}
+                      blur={formik.handleBlur}
+                      error={formik.errors.billCity || ""}
+                      touched={formik.touched.billCity || false}
+                      autofocus={true}
+                    />
                   </div>
                   <div className="checkout-data__second-input">
-                    <div className="checkout-data__title checkout-text">
-                      State*
-                    </div>
-                    <div className="checkout-data__input">
-                      <input
-                        autoComplete="off"
-                        type="text"
-                        name="billState"
-                        defaultValue={formik.values.shipState}
-                        value={formik.values.billState}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        className="input"
-                        autoFocus
-                      />
-                      {formik.errors.billState && formik.touched.billState && (
-                        <div className={"checkout-error"}>
-                          {formik.errors.billState}
-                        </div>
-                      )}
-                    </div>
+                    <CustomInput
+                      title={"State*"}
+                      name={"billState"}
+                      defaultValue={formik.values.shipCity || ""}
+                      value={formik.values.billState || ""}
+                      change={formik.handleChange}
+                      blur={formik.handleBlur}
+                      error={formik.errors.billState || ""}
+                      touched={formik.touched.billState || false}
+                      autofocus={true}
+                    />
                   </div>
                 </div>
               </div>
