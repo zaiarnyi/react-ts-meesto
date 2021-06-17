@@ -5,11 +5,36 @@
 	font-weight: 700;
 	cursor: default;
 }
+// .checkout-pre-error
+.checkout-pre-error {
+	padding-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	.checkout-error{
+		padding: 0;
+	}
+}
+// .checkout-error
+
+.checkout-error {
+	padding-top: 10px;
+	color:var(--color-third);
+	font-size: 14px;
+	font-weight: 700;
+	transition: all .3s ease;
+	&:first-letter{
+		text-transform: uppercase;
+	}
+}
 
 .checkout-text {
 	color: var(--color-second);
 	font-size: 14px;
 	cursor: default;
+	&:first-letter{
+		text-transform: uppercase;
+	}
 
 	&_link {
 		text-decoration: underline;
@@ -138,19 +163,18 @@
 
 	&__coupon {
 		padding: 25px 0 0 0;
-
-		.checkbox {
-			.checkbox__input {
-
-				&:checked+.checkbox__text+.input {
-					opacity: 1;
-					visibility: visible;
-					@include tr(0%, 0%);
-					transition: all 0.3s ease 0s;
+		.checkbox__text{
+			font-size: 14px;
+		}
+			.checkout-pre-error{
+				padding: 0;
+				flex-direction: column;
+				.checkout-error{
+					align-self: flex-start;
+					padding-left: 23px;
+					padding-top: 10px;
 				}
 			}
-		}
-
 		.input {
 			width: 90%;
 			border: 1px solid #bdbdbd;
@@ -204,6 +228,12 @@
 		&_check {
 			display: flex;
 			margin: 0 0 0 0;
+			.checkbox__text {
+				cursor: pointer;
+				&:first-letter{
+					text-transform: uppercase;
+				}
+			}
 		}
 
 		// .checkout-data__payment
@@ -215,31 +245,10 @@
 
 	&__delivery {
 		margin: 0 50px 0 0;
-
-		.checkbox__input {
-			&+.checkbox__text {
-				cursor: pointer;
-			}
-
-			&:checked+.checkbox__text {
-				font-weight: 700;
-			}
-		}
 	}
 
 	// .checkout-data__new-account
 
-	&__new-account {
-		.checkbox__input {
-			&+.checkbox__text {
-				cursor: pointer;
-			}
-
-			&:checked+.checkbox__text {
-				font-weight: 700;
-			}
-		}
-	}
 
 
 	// .checkout-data__body-input
@@ -355,8 +364,8 @@
 		}
 
 		a {
-			display: inline-block;
-			padding: 10px 0 0 0;
+			//display: inline-block;
+			//padding: 10px 0 0 0;
 		}
 
 		&_login {
@@ -377,12 +386,19 @@
 		font-weight: 700;
 		padding: 0 80px;
 		align-self: center;
-		margin-top: -12px;
+		margin-top: -5px;
 		margin-left: 25px;
 		text-transform: capitalize;
-
+		transition: all .3s ease;
 		@media (max-width:$md3 + px) {
 			margin: 0 0 0 auto;
+		}
+		&:disabled{
+			background-color: transparent;
+			border: 1px solid #000;
+			color:#000;
+			opacity: 0.7;
+			pointer-events: none;
 		}
 	}
 
@@ -394,19 +410,6 @@
 	}
 	// .checkout-data__pre-error
 
-	&__pre-error {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	// .checkout-data__error
-
-	&__error {
-		color:var(--color-third);
-		font-size: 18px;
-		font-weight: 700;
-		transition: all .3s ease;
-	}
 }
 
 //====================================================================================================
@@ -541,6 +544,9 @@
 			&:last-child {
 				margin: 0 0 0 0;
 			}
+			&:first-letter{
+				text-transform: uppercase;
+			}
 		}
 	}
 
@@ -575,6 +581,9 @@
 	&__subtext {
 		color: #707070;
 		font-size: 14px;
+		&:first-letter{
+			text-transform: uppercase;
+		}
 	}
 }
 
@@ -619,6 +628,9 @@
 		.checkbox__text {
 			color: #000000;
 			font-size: 14px;
+			a{
+				color:#000;
+			}
 		}
 
 		.input {
@@ -651,6 +663,13 @@
 		height: 46px;
 		background-color: var(--color-main);
 		padding: 0 30px;
+		&:disabled{
+			background-color: transparent;
+			border: 1px solid #000;
+			color:#000;
+			opacity: 0.7;
+			pointer-events: none;
+		}
 	}
 }
 

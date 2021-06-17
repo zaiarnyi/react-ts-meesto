@@ -4,12 +4,11 @@ import { Header } from "./components/General/Header/Header";
 import { AlertAdvertising } from "./components/General/AlertAdvertising";
 import { Footer } from "./components/General/Footer";
 import { Home } from "./components/Pages/Home";
-import { NoMatch } from "./components/Pages/NoMatch";
-import { Product } from "./components/Pages/Product";
-import { Checkout } from "./components/Pages/Checkout";
-
+import { CSSTransition } from "react-transition-group";
 const Catalog = React.lazy(() => import("./components/Pages/Catalog"));
-
+const Checkout = React.lazy(() => import("./components/Pages/Checkout"));
+const NoMatch = React.lazy(() => import("./components/Pages/NoMatch"));
+const Product = React.lazy(() => import("./components/Pages/Product"));
 export interface IParamsCatalog {
   gender: string;
   category?: string;

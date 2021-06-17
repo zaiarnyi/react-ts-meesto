@@ -74,7 +74,10 @@
 	&__link {
 		color: #757575;
 		font-size: 16px;
-		text-transform: capitalize;
+		//text-transform: lowercase;
+		&:first-letter{
+			text-transform: uppercase;
+		}
 
 		@media (max-width:$md4 + px) {
 			line-height: 24px;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BreadCrumbs } from "../Catalog/Filters/BreadCrumbs/BreadCrumbs";
+import { BreadCrumbs } from "../General/BreadCrumbs/BreadCrumbs";
 import { FilterCatalog } from "../Catalog/Filters/FilterCatalog";
 import { DealsItem } from "../General/Deals/DealsItem";
 import { LoadCatalog } from "../Catalog/LoadCatalog/LoadCatalog";

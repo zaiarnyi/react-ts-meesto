@@ -9,7 +9,7 @@ interface IInitValues {
   password: string;
 }
 
-export const LogIsCheck: React.FC<ILogIsCheckProp> = (props) => {
+export const LogIsCheck: React.FC<ILogIsCheckProp> = React.memo((props) => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -47,10 +47,8 @@ export const LogIsCheck: React.FC<ILogIsCheckProp> = (props) => {
               onBlur={formik.handleBlur}
               className="input"
             />
-            {formik.errors.email && (
-              <div className={"checkout-data__error"}>
-                {formik.errors.email}
-              </div>
+            {formik.errors.email && formik.touched.email && (
+              <div className={"checkout-error"}>{formik.errors.email}</div>
             )}
           </div>
         </div>
@@ -66,25 +64,27 @@ export const LogIsCheck: React.FC<ILogIsCheckProp> = (props) => {
               onChange={formik.handleChange}
               className="input"
             />
-            <div className={"checkout-data__pre-error"}>
-              {formik.errors.password && (
-                <div className={"checkout-data__error"}>
-                  {formik.errors.password}
-                </div>
+            <div className={"checkout-pre-error"}>
+              {formik.errors.password && formik.touched.password && (
+                <div className={"checkout-error"}>{formik.errors.password}</div>
               )}
               <Link
                 to={"/forgot-password"}
-                className="checkout-data__title checkout-text checkout-text_link "
+                className="checkout-text checkout-text_link "
               >
                 Forgot password
               </Link>
             </div>
           </div>
         </div>
-        <button type="submit" className="checkout-data__btn">
+        <button
+          type="submit"
+          className="checkout-data__btn"
+          disabled={!(formik.isValid && formik.dirty)}
+        >
           login
         </button>
       </div>
     </div>
   );
-};
+});

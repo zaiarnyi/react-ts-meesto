@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { BreadCrumbs } from "../Catalog/Filters/BreadCrumbs/BreadCrumbs";
+import { BreadCrumbs } from "../General/BreadCrumbs/BreadCrumbs";
 import { SliderProduct } from "../Product/Slider/SliderProduct";
 import { PriceProduct } from "../Product/Price/PriceProduct";
 import { useFormik } from "formik";
@@ -76,7 +76,7 @@ const photoGallery = [
   [product4WEBP, product4JPG],
 ];
 
-export const Product: React.FC<IProductProp> = React.memo((props) => {
+const Product: React.FC<IProductProp> = React.memo((props) => {
   const detailsRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [productBlock, setProductBlock] = useState(true);
@@ -433,3 +433,5 @@ export const Product: React.FC<IProductProp> = React.memo((props) => {
     </>
   );
 });
+
+export default Product;
